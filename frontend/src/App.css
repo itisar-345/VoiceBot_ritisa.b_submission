@@ -1,0 +1,86 @@
+/* Base App Styling */
+.App {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #e0e7ff, #fdf4ff);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styling */
+.app-header {
+  position: relative;
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  background: linear-gradient(to right, #a78bfa, #60a5fa);
+  color: #1e1b4b;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Fixed Toggle Button */
+.side-nav-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #b794f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+/* Header Content */
+.header-content h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+}
+
+.header-content p {
+  margin: 0;
+  font-size: 1rem;
+  color: #312e81;
+}
+
+.header-content h3 {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+/* Main Content */
+.main-content {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Sections */
+.section-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4c1d95;
+}
+
+.questions-section,
+.chatbox-section {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Sidebar Interaction Margin */
+.App.side-nav-open main {
+  margin-left: 260px;
+}
+
+.App.side-nav-closed main {
+  margin-left: 0;
+}
