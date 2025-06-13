@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useSpeech } from './SpeechContext';
+import { useSettings } from './SettingsContext';
 
 const ConversationContext = createContext(undefined);
 
@@ -20,6 +21,7 @@ export const ConversationProvider = ({ children }) => {
   const [conversations, setConversations] = useState([]);
   const [currentConversationId, setCurrentConversationId] = useState(null);
   const [allConversations, setAllConversations] = useState({});
+  const { selectedLanguage } = useSettings();
   const { speak } = useSpeech();
 
   useEffect(() => {
@@ -186,7 +188,19 @@ export const ConversationProvider = ({ children }) => {
       speak(data.response);
     } catch (error) {
       console.error('API Error:', error);
-      const errorMessage = "I apologize, but I'm having trouble processing your request. Could you try again?";
+
+      // Language-specific error messages
+      let errorMessage;
+      switch (selectedLanguage.code) {
+        case 'hi-IN':
+          errorMessage = "माफ़ कीजिए, लेकिन मैं आपके अनुरोध को संसाधित करने में समस्या आ रही है। क्या आप फिर से कोशिश कर सकते हैं?";
+          break;
+        case 'en-US':
+        default:
+          errorMessage = "I apologize, but I'm having trouble processing your request. Could you try again?";
+          break;
+      }
+      
       const errorFinalMessage = {
         ...pendingMessage,
         content: errorMessage
@@ -208,7 +222,7 @@ export const ConversationProvider = ({ children }) => {
 
       speak(errorMessage);
     }
-  }, [messages, speak, currentConversationId]);
+  }, [messages, speak, currentConversationId, selectedLanguage.code]);
 
   const loadConversation = useCallback((id) => {
     const conversation = allConversations[id];
