@@ -22,6 +22,7 @@ export const SettingsProvider = ({ children }) => {
   const [selectedVoice, setSelectedVoice] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState(DEFAULT_LANGUAGES[0]);
   const [availableLanguages, setAvailableLanguages] = useState(DEFAULT_LANGUAGES);
+  const [preferredLanguage, setPreferredLanguage] = useState(null);
 
   useEffect(() => {
     if ('speechSynthesis' in window) {
@@ -33,16 +34,6 @@ export const SettingsProvider = ({ children }) => {
           const defaultVoice =
             voices.find((voice) => voice.lang.startsWith(selectedLanguage.code)) || voices[0];
           setSelectedVoice(defaultVoice);
-
-          const supportedLanguages = Array.from(
-            new Set(voices.map((voice) => voice.lang.split('-')[0]))
-          );
-
-          setAvailableLanguages(
-            DEFAULT_LANGUAGES.filter((lang) =>
-              supportedLanguages.some((supported) => lang.code.startsWith(supported))
-            )
-          );
         }
       };
 
@@ -65,6 +56,8 @@ export const SettingsProvider = ({ children }) => {
         selectedVoice,
         setSelectedVoice,
         selectedLanguage,
+ preferredLanguage,
+ setPreferredLanguage,
         setSelectedLanguage,
         availableLanguages,
       }}
