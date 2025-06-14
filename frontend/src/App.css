@@ -1,8 +1,7 @@
 /* Base App Styling */
 .App {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #e0e7ff, #fdf4ff);
-  min-height: 100vh;
+ background-color: #e0e7ff; /* Default light mode background */
   padding-bottom: 4rem;
   display: flex;
   flex-direction: column;
@@ -83,4 +82,35 @@
 
 .App.side-nav-closed main {
   margin-left: 0;
+}
+
+/* Dark Mode Styles */
+.App.dark-mode {
+ background-color: #1a202c; /* Dark mode background */
+ color: #e2e8f0; /* Light text color */
+}
+
+.App.dark-mode .app-header {
+ background: linear-gradient(to right, #4c51bf, #6b46c1); /* Darker header gradient */
+ color: #e2e8f0; /* Light text in header */
+}
+
+.App.dark-mode .side-nav-toggle {
+ background: #6b46c1; /* Darker toggle button */
+ color: #e2e8f0; /* Light text in toggle */
+}
+
+.App.dark-mode .header-content h1,
+.App.dark-mode .header-content p,
+.App.dark-mode .header-content h3 {
+ color: #e2e8f0; /* Light text in header content */
+}
+
+.App.dark-mode .section-heading {
+ color: #9f7aea; /* Purple heading in dark mode */
+}
+
+/* Add dark mode styles for other components as needed */
+.App.dark-mode .message-item.user {
+ background-color: #4a5568; /* Darker background for user messages */
 }
