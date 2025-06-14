@@ -1,22 +1,28 @@
-/* toggle.css */
-
 .toggle-btn {
   padding: 6px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
-  background-color: transparent;
-  color: inherit;
-  font-size: 14px;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-body[data-theme='dark'] .toggle-btn {
-  border-color: var(--color-border-dark);
+  transition: all 0.3s ease;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
 }
 
 .toggle-btn:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: white;
+  transform: translateY(-1px) scale(1.05);
+}
+
+.toggle-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+@media (max-width: 480px) {
+  .toggle-btn {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
 }

@@ -1,16 +1,26 @@
 import React, { useState, useContext } from 'react';
 import { User, Lock, Mail, LogIn, UserPlus } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthProvider'; // Fixed import path
 import '../styles/auth.css';
+import { useNavigate } from 'react-router-dom'; // Added for navigation
 
 const Auth = () => {
-  const { login } = useContext(AuthContext);
+  const context = useContext(AuthContext);
+  const navigate = useNavigate(); // Added for redirect after login
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     username: '',
   });
+
+  // Check if context is defined
+  if (!context) {
+    console.error('AuthContext is undefined. Ensure Auth is wrapped in AuthProvider.');
+    return <div>Error: Auth context not available</div>;
+  }
+
+  const { login } = context;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,12 +32,14 @@ const Auth = () => {
     // Mock login/signup logic
     const user = { email: formData.email, username: formData.username || formData.email };
     login(user);
+    navigate('/chat'); // Redirect to chat after login
   };
 
   const handleGoogleSignIn = () => {
     // Mock Google Sign-In
     const user = { email: 'googleuser@example.com', username: 'Google User' };
     login(user);
+    navigate('/chat'); // Redirect to chat after Google sign-in
   };
 
   return (

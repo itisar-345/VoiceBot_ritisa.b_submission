@@ -6,12 +6,10 @@ const VoiceInput = ({ onAudioSubmit, onTextSubmit }) => {
   const mediaRecorderRef = useRef(null);
   const [recording, setRecording] = useState(false);
   const [text, setText] = useState('');
-  const [transcript, setTranscript] = useState(''); // State for real-time transcript
+  const [transcript, setTranscript] = useState('');
   const chunks = useRef([]);
 
-  // Mock real-time transcription (replace with Web Speech API in production)
   const startTranscription = () => {
-    // Simulate real-time transcription
     let simulatedTranscript = '';
     const words = ['Hello', 'this', 'is', 'a', 'test', 'voice', 'message'];
     let wordIndex = 0;
@@ -28,7 +26,7 @@ const VoiceInput = ({ onAudioSubmit, onTextSubmit }) => {
       } else {
         clearInterval(interval);
       }
-    }, 500); // Add a word every 500ms
+    }, 500);
   };
 
   const startRecording = async () => {
@@ -36,7 +34,7 @@ const VoiceInput = ({ onAudioSubmit, onTextSubmit }) => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorderRef.current = new MediaRecorder(stream);
       setRecording(true);
-      setTranscript(''); // Reset transcript
+      setTranscript('');
 
       mediaRecorderRef.current.ondataavailable = (e) => chunks.current.push(e.data);
       mediaRecorderRef.current.onstop = () => {
@@ -46,8 +44,8 @@ const VoiceInput = ({ onAudioSubmit, onTextSubmit }) => {
       };
 
       mediaRecorderRef.current.start();
-      startTranscription(); // Start mock transcription
-      setTimeout(() => stopRecording(), 5000); // Auto stop after 5 seconds
+      startTranscription();
+      setTimeout(() => stopRecording(), 5000);
     } catch (err) {
       console.error('Microphone access error:', err);
     }

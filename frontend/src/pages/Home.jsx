@@ -4,14 +4,14 @@ import ThemeToggle from '../components/ThemeToggle';
 import SlidingSidebar from '../components/SlidingSidebar';
 import { speak } from '../utils/speak';
 import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, Mic } from 'lucide-react';
 import '../styles/app.css';
 import '../styles/slider.css';
 
 const Home = () => {
-  const { user, logout } = useContext(AuthContext);
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([[]]);
   const [activeSessionIndex, setActiveSessionIndex] = useState(0);
@@ -20,6 +20,13 @@ const Home = () => {
   const [language, setLanguage] = useState('en');
   const chatMessagesRef = useRef(null);
   const [translations, setTranslations] = useState({});
+
+  if (!context) {
+    console.error('AuthContext is undefined. Ensure Home is wrapped in AuthProvider.');
+    return <div>Error: Auth context not available</div>;
+  }
+
+  const { user, logout } = context;
 
   useEffect(() => {
     if (!user) {
@@ -96,12 +103,16 @@ const Home = () => {
     try {
       addMessageToSession({
         type: 'user',
-        message: userTranscript || '🎙️ Voice message...',
+        message: userTranscript || ' Voice message...',
         audioUrl,
         transcript: userTranscript || 'Transcription not available',
       });
 
-      const res = await axios.post('http://localhost:5000/api/ai/voice', formData);
+      const res = await axios.post('/api/ai/voice', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       let { reply, language: responseLanguage, transcript: botTranscript } = res.data;
 
       if (detectHinglish(reply)) {
@@ -130,7 +141,7 @@ const Home = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/text', {
+      const res = await axios.post('/api/ai/text', {
         text,
         language: effectiveLanguage,
       });
