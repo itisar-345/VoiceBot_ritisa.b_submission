@@ -96,20 +96,29 @@ function analyzeContext(messages) {
     .map(m => m.content.toLowerCase());
 
   if (lastUserMessage.length > 0) {
+    const lastMessageLower = lastUserMessage[0];
     productInfo.products.forEach(product => {
-      if (lastUserMessage[0].includes(product.name.toLowerCase()) || 
-          (product.nameHi && lastUserMessage[0].includes(product.nameHi.toLowerCase()))) {
+      const productNameLower = product.name.toLowerCase();
+      const productNameHiLower = product.nameHi ? product.nameHi.toLowerCase() : '';
+      // Check for product name in English, Hindi, or a mix
+      if (lastMessageLower.includes(productNameLower) || 
+          (productNameHiLower && lastMessageLower.includes(productNameHiLower)) ||
+          (lastMessageLower.includes('crm') && (lastMessageLower.includes('small business') || lastMessageLower.includes('छोटे व्यवसाय'))) ||
+          (lastMessageLower.includes('sales analytics') && lastMessageLower.includes('pro')) ||
+          (lastMessageLower.includes('customer support') && lastMessageLower.includes('module'))
+         ) {
         context.lastProduct = product.name;
       }
     });
 
-    if (lastUserMessage[0].includes('price') || lastUserMessage[0].includes('cost') ||
-        lastUserMessage[0].includes('कीमत') || lastUserMessage[0].includes('मूल्य') || lastUserMessage[0].includes('दाम')) {
+    // Check for topics in English, Hindi, or a mix
+    if (lastMessageLower.includes('price') || lastMessageLower.includes('cost') || lastMessageLower.includes('pricing') ||
+        lastMessageLower.includes('कीमत') || lastMessageLower.includes('मूल्य') || lastMessageLower.includes('दाम')) {
       context.lastTopic = 'pricing';
-    } else if (lastUserMessage[0].includes('competitor') || lastUserMessage[0].includes('compare') ||
-               lastUserMessage[0].includes('प्रतियोगी') || lastUserMessage[0].includes('तुलना')) {
+    } else if (lastMessageLower.includes('competitor') || lastMessageLower.includes('compare') || lastMessageLower.includes('difference') ||
+               lastMessageLower.includes('प्रतियोगी') || lastMessageLower.includes('तुलना') || lastMessageLower.includes('अंतर')) {
       context.lastTopic = 'competitors';
-    } else if (lastUserMessage[0].includes('product') || lastUserMessage[0].includes('feature') ||
+    } else if (lastMessageLower.includes('product') || lastMessageLower.includes('feature') || lastMessageLower.includes('solution') ||
                lastUserMessage[0].includes('उत्पाद') || lastUserMessage[0].includes('फीचर') || lastUserMessage[0].includes('विशेषता')) {
       context.lastTopic = 'products';
     }
@@ -311,30 +320,39 @@ function matchKeywords(query, messages, language) {
   analyzeContext(messages);
 
   // Handle greetings in the selected language
-  if (queryLower.includes('hello') || queryLower.includes('hi') || queryLower.includes('hey') ||
-      queryLower.includes('नमस्ते') || queryLower.includes('नमस्कार') || queryLower.includes('हैलो')) {
+  if (queryLower.includes('hello') || queryLower.includes('hi') || queryLower.includes('hey') || queryLower.includes('नमस्ते') || queryLower.includes('नमस्कार') || queryLower.includes('हैलो')) {
     return getRandomResponse('greeting', language);
   }
 
   // Product queries
+  // Check for product-related keywords in English, Hindi, or a mix
   if (queryLower.includes('product') || queryLower.includes('offer') || queryLower.includes('solution') || 
       queryLower.includes('feature') || queryLower.includes('उत्पाद') || queryLower.includes('समाधान') || 
-      queryLower.includes('फीचर') || queryLower.includes('विशेषता')) {
+      queryLower.includes('फीचर') || queryLower.includes('विशेषता') ||
+      (queryLower.includes('kya') && (queryLower.includes('product') || queryLower.includes('solutions'))) || // "kya product/solutions hain"
+      (queryLower.includes('aapke') && (queryLower.includes('paas') || queryLower.includes('pass')) && (queryLower.includes('products') || queryLower.includes('solutions'))) // "आपके पास products/solutions हैं"
+     ) {
     return responses.products[language](context.lastProduct);
   }
 
   // Pricing queries
+  // Check for pricing-related keywords in English, Hindi, or a mix
   if (queryLower.includes('price') || queryLower.includes('cost') || queryLower.includes('pricing') ||
-      queryLower.includes('कीमत') || queryLower.includes('मूल्य') || queryLower.includes('दाम')) {
+      queryLower.includes('कीमत') || queryLower.includes('मूल्य') || queryLower.includes('दाम') ||
+      (queryLower.includes('kya') && (queryLower.includes('price') || queryLower.includes('cost') || queryLower.includes('कीमत'))) || // "kya price/cost/कीमत hai"
+      (queryLower.includes('kitne') && (queryLower.includes('ka') || queryLower.includes('ka hai'))) // "kitne ka hai"
+     ) {
     return responses.pricing[language](context.lastProduct);
   }
 
   // Competitor queries
+  // Check for competitor-related keywords in English, Hindi, or a mix
   if (queryLower.includes('competitor') || queryLower.includes('compare') || queryLower.includes('difference') ||
-      queryLower.includes('प्रतियोगी') || queryLower.includes('तुलना') || queryLower.includes('अंतर')) {
-    const competitor = productInfo.competitors.find(c =>
-      queryLower.includes(c.name.toLowerCase())
-    )?.name;
+      queryLower.includes('प्रतियोगी') || queryLower.includes('तुलना') || queryLower.includes('अंतर') ||
+      (queryLower.includes('compare') && (queryLower.includes('to') || queryLower.includes('se')) && (queryLower.includes('competitor') || queryLower.includes('pratiyogi'))) // "compare to/se competitor/pratiyogi"
+     ) {
+    // For now, we don't have competitors in the productInfo, so we won't try to find a specific one.
+    const competitor = null; 
     return responses.competitors[language](competitor);
   }
 
@@ -356,12 +374,19 @@ function matchKeywords(query, messages, language) {
 export async function processQuery(query, messages = [], preferredLanguage = null) {
   const baseDelay = 1000;
   const complexityFactor = query.length / 20;
-  const randomVariation = Math.random() * 500;
+  const randomVariation = Math.random() * 500; // Increased random variation
 
+  // Simulate processing time
   await new Promise(resolve => setTimeout(resolve, baseDelay + complexityFactor * 100 + randomVariation));
 
-  // Always use preferredLanguage if set, otherwise fall back to detection
+  // Determine the output language: prioritize preferredLanguage from settings,
+  // otherwise use detected language from the input.
   const language = preferredLanguage || detectLanguage(query);
+
+  // The matchKeywords function needs to handle bilingual input and provide
+  // output based on the 'language' variable. This requires the internal logic
+  // to be able to understand both English and Hindi and potentially translate
+  // if the input language doesn't match the output language.
 
   return matchKeywords(query, messages, language);
 }

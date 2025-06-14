@@ -166,7 +166,7 @@ const SettingsPanel = ({ isOpen, onClose }) => {
                         {availableVoices
                           .filter(voice => voice.lang.startsWith(selectedLanguage.code.split('-')[0]))
                           .map((voice) => (
-                            <option key={voice.voiceURI} value={voice.voiceURI}>
+                            <option key={`${voice.voiceURI}-${voice.lang}`} value={voice.voiceURI}>
                               {voice.name}
                             </option>
                           ))}

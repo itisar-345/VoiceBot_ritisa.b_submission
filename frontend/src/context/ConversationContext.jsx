@@ -156,7 +156,8 @@ export const ConversationProvider = ({ children }) => {
         },
         body: JSON.stringify({ 
           query: content,
-          messages: messages.filter(m => m.sender === 'user').map(m => m.content)
+          messages: Array.isArray(messages) ? messages.filter(m => m.sender === 'user').map(m => m.content) : [],
+          selectedLanguage: selectedLanguage.code // Add selected language to the request body
         })
       });
 
