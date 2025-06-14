@@ -1,0 +1,81 @@
+/* voice.css */
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-bar-form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+}
+
+body[data-theme='dark'] .search-bar-container {
+  border-color: var(--color-border-dark);
+  background-color: var(--color-bg-dark);
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: var(--color-text-light);
+  font-size: 14px;
+  outline: none;
+}
+
+body[data-theme='dark'] .search-bar {
+  color: var(--color-text-dark);
+}
+
+.mic-button {
+  padding: 10px;
+  border: none;
+  background-color: var(--color-secondary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mic-button.recording {
+  background-color: var(--color-primary);
+}
+
+.mic-button:hover:not(.recording) {
+  background-color: var(--color-accent);
+}
+
+.send-button {
+  padding: 10px;
+  border: none;
+  background-color: var(--color-secondary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: var(--color-accent);
+}
+
+.mic-status {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+body[data-theme='dark'] .mic-status {
+  color: #9ca3af;
+}

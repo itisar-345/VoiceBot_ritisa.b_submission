@@ -1,0 +1,143 @@
+/* auth.css */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-bg-light);
+}
+
+body[data-theme='dark'] .auth-container {
+  background-color: var(--color-bg-dark);
+}
+
+.auth-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+body[data-theme='dark'] .auth-card {
+  background-color: #1e1e1e;
+  box-shadow: var(--shadow-dark);
+}
+
+.auth-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body[data-theme='dark'] .toggle-btn {
+  background-color: #333;
+  color: #ddd;
+}
+
+.toggle-btn.active,
+.toggle-btn:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--color-text-light);
+}
+
+body[data-theme='dark'] .form-group label {
+  color: var(--color-text-dark);
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: inherit;
+  font-size: 14px;
+}
+
+body[data-theme='dark'] .form-group input {
+  border-color: var(--color-border-dark);
+}
+
+.submit-btn {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.google-signin {
+  margin-top: 20px;
+}
+
+.google-btn {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body[data-theme='dark'] .google-btn {
+  border-color: var(--color-border-dark);
+}
+
+.google-btn:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
