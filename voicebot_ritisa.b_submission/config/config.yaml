@@ -1,0 +1,19 @@
+model:
+  asr:
+    model_name: "facebook/wav2vec2-large-xlsr-53-hindi"
+    sampling_rate: 16000
+  nlp:
+    intent_model: "bert-base-multilingual-cased"
+    ner_model: "ai4bharat/ner-multilingual-indic-bert"
+    sentiment_model: "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+  response_generation:
+    chatbot_model: "microsoft/DialoGPT-medium-hindi"
+    
+data:
+  audio_extensions: [".wav", ".mp3"]
+  max_audio_length: 30  # seconds
+  supported_languages: ["hi", "en", "hinglish"]
+  
+processing:
+  batch_size: 8
+  device: "cuda" if available else "cpu"
