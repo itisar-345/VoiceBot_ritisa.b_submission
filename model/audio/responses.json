@@ -1,0 +1,135 @@
+[
+    {
+        "audio_file": "recording_1749888521.wav",
+        "transcription": "no o no  i in it",
+        "intent": "unknown",
+        "language": "en",
+        "response": "I apologize, but I cannot form a meaningful response from the query \"no o no i in it\" as it appears to be incomplete or unclear. The provided context appears to be a fragmented conversation about someone checking an account or waiting for something to arrive on Monday, but without a clear question, I cannot provide a specific answer."
+    },
+    {
+        "audio_file": "recording_1749888866.wav",
+        "transcription": "youi i ga ay reny wom doect a",
+        "intent": "unknown",
+        "language": "en",
+        "response": "I apologize, but the query appears to be gibberish or corrupted text. I cannot provide a meaningful answer to \"youi i ga ay reny wom doect a\" as it does not form a coherent question or statement. Please rephrase your query clearly so I can help you better."
+    },
+    {
+        "audio_file": "recording_1749888937.wav",
+        "transcription": "becasseae latoina foude to",
+        "intent": "unknown",
+        "language": "en",
+        "response": "I apologize, but your query appears to be unclear or contains typos (\"becasseae latoina foude to\" is not comprehensible). Could you please rephrase your question clearly so I can provide an appropriate response based on the given context about LenDenClub and its co-founders?"
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "hello",
+        "intent": "greeting",
+        "language": "en",
+        "response": "Hi! How can I help you today?"
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "do you do",
+        "intent": "question",
+        "language": "en",
+        "response": "I couldn't process your request. Please try again."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "can you tell me about the services",
+        "intent": "question",
+        "language": "en",
+        "response": "Based on the provided context, I cannot give specific details about services since they were not mentioned. The context only indicates that you can create a new account to reach out and have a point of contact for queries, but doesn't describe any actual services offered."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "hay mera naam akshita hai mujhe loan ke bare mein",
+        "intent": "greeting",
+        "language": "en",
+        "response": "I couldn't process your request. Please try again."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "mera naam akshita hai and mujhe loan ke bare mein",
+        "intent": "query",
+        "language": "en",
+        "response": "Based on the context, I can tell you that you can take a loan through their app. The conversation mentions loan availability and investment options with 4-month loan terms. For specific details about getting a loan, you would need to check the app directly."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "company ko join karna hai to main kaise karun jara bata sakte hain kya",
+        "intent": "question",
+        "language": "en",
+        "response": "Based on the context provided, there isn't specific information about how to join the company. The conversation appears to be between a relationship manager and an investor discussing investments and returns, but doesn't contain details about joining the company. You would need to contact the company directly or visit their official website to learn about employment opportunities."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "ritisha pagal hai uska kuchh kar sakta hun kya",
+        "intent": "question",
+        "language": "en",
+        "response": "I apologize, but I cannot and should not help with any harmful actions against others, including Ritisha or anyone else. If you're having issues with someone, I encourage you to:\n\n1. Have a respectful conversation to resolve differences\n2. Seek help from appropriate authorities if needed\n3. Work towards a constructive solution\n\nHarassment or causing harm to others is not acceptable."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "as a project",
+        "intent": "command",
+        "language": "en",
+        "response": "Based on the context provided, I cannot provide a clear answer about any specific project. While the context mentions Dipesh Karki co-founded LenDenClub and developed a piping isometric drawing application (pipeISO), there isn't enough specific information to address a query about \"as a project.\" If you have a specific question about a project, please provide more details."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "mujhe aaj ghar badalna hai main kuchh kar sakta hun kya",
+        "intent": "COMMAND\n\n(The text appears to be in Hindi/Urdu transliterated to Latin script, expressing \"I need to move house today, what can I do?\" - which is essentially seeking direction/action, making it a command-type intent)",
+        "language": "en",
+        "response": "This query is unrelated to the given context. The context appears to be about screenshots, payments, and monthly transactions, while the query is about moving houses. I cannot provide a relevant answer based on the given context."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "mere ko english nahin aata to kya aap shuddh hindi mein mujhse baat kar sakte hain",
+        "intent": "question",
+        "language": "en",
+        "response": "हाँ, बिल्कुल! मैं आपसे शुद्ध हिंदी में बात कर सकती/सकता हूँ। आप बेझिझक अपनी बात हिंदी में कहें और मैं भी आपसे हिंदी में ही संवाद करूँगी/करूँगा।"
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "yadi mujhe koi samasya ho to kya main aapse nivedan kar sakta hun",
+        "intent": "QUESTION",
+        "language": "en",
+        "response": "Ha, aap kisi bhi samasya ke liye team ko raise kar sakte hain aur screenshot bhej sakte hain. Main aapki madad ke liye available hun."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "tumhara samajhte ka mi kay bolto aahe tumhara",
+        "intent": "unknown",
+        "language": "en",
+        "response": "Based on the context, the conversation appears to be about payment transactions, disbursements, and pending amounts in Hindi and English. However, your query is in Marathi and asks \"What do you understand about what I'm saying?\" Since the context and query are in different languages and don't directly relate to each other, I cannot provide a specific answer to your query from the given context."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "nega nalla irukingala sollunga",
+        "intent": "greeting",
+        "language": "en",
+        "response": "Since your query is in Tamil asking \"How are you?\", I should respond: I'm doing well, thank you for asking. However, I can only engage in conversations in English as that is what I'm designed for."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "nikki dala ke liye",
+        "intent": "unknown (The text appears to be in a different language and without clear context to determine intent)",
+        "language": "en",
+        "response": "I couldn't process your request. Please try again."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "devarshi",
+        "intent": "greeting",
+        "language": "en",
+        "response": "I couldn't process your request. Please try again."
+    },
+    {
+        "audio_file": "live_input",
+        "transcription": "singapore",
+        "intent": "search",
+        "language": "en",
+        "response": "There is no mention of Singapore in the provided context. The context discusses loan disbursements, lending milestones, and some business achievements related to LenDenClub, but does not contain any information about Singapore."
+    }
+]

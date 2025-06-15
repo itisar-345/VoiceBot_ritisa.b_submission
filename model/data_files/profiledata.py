@@ -225,13 +225,15 @@ responses = {
         ) + "\n\nरुचि है कि इन कौशलों का उनके करियर में कैसे उपयोग किया गया?"
     },
     'education': {
-        'en': lambda person_index: f"{profile_data['profiles']['names'][person_index]}'s educational background:\n\n" + '\n'.join(
-            [f"• {edu['degree']} from {edu['institution']}{f' ({edu['duration']})' if edu.get('duration') else ''}" for edu in profile_data['profiles']['educations'][person_index]]
-        ) + "\n\nWant to know more about their academic journey?",
-        'hi': lambda person_index: f"{profile_data['profiles']['namesHi'][person_index]} की शैक्षिक पृष्ठभूमि:\n\n" + '\n'.join(
-            [f"• {edu['institution']} से {edu['degreeHi']}{f' ({edu['durationHi']})' if edu.get('durationHi') else ''}" for edu in profile_data['profiles']['educations'][person_index]]
-        ) + "\n\nउनकी शैक्षणिक यात्रा के बारे में और जानना चाहते हैं?"
+    'en': lambda person_index: f"{profile_data['profiles']['names'][person_index]}'s educational background:\n\n" + '\n'.join(
+        [f"• {edu['degree']} from {edu['institution']}" + (f" ({edu['duration']})" if edu.get('duration') else '') for edu in profile_data['profiles']['educations'][person_index]]
+    ) + "\n\nWant to know more about their academic journey?",
+    
+    'hi': lambda person_index: f"{profile_data['profiles']['namesHi'][person_index]} की शैक्षिक पृष्ठभूमि:\n\n" + '\n'.join(
+        [f"• {edu['institution']} से {edu['degreeHi']}" + (f" ({edu['durationHi']})" if edu.get('durationHi') else '') for edu in profile_data['profiles']['educations'][person_index]]
+    ) + "\n\nउनकी शैक्षणिक यात्रा के बारे में और जानना चाहते हैं?"
     },
+
     'fallback': {
         'en': [
             "Could you clarify who you'd like to know about (Bhavin Patel or Dipesh Karki) or what specific topic (e.g., experience, skills, education)?",
