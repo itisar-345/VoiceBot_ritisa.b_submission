@@ -1,0 +1,19 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+body.dark {
+  background: #121212;
+  color: #f5f5f5;
+}
+
+body.light {
+  background: #fff;
+  color: #111;
+}

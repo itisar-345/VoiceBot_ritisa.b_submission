@@ -1,44 +1,53 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import http from "http";
+import cors from "cors";
+import dotenv from "dotenv";
+import { Server as SocketIO } from "socket.io";
+
+import authRoutes from "./routes/authRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";      // optional
+import { verifyJwtSocket } from "./middlewares/verifyJwtSocket.js";
+import { handleSocket } from "./services/wsService.js";
 
 dotenv.config();
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: 'https://5173-firebase-voicebotgit-1749826517908.cluster-iktsryn7xnhpexlu6255bftka4.cloudworkstations.dev',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-}));
+// ── Express middlewares ─────────────────────────────
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Debug middleware to log all requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
+// ── REST routes ─────────────────────────────────────
+app.use("/api/auth", authRoutes);
+app.use("/api/chat", chatRoutes); // e.g. GET /history (optional)
+
+// ── HTTP + WebSocket server ─────────────────────────
+const server = http.createServer(app);
+const io = new SocketIO(server, {
+  cors: { origin: "*" },        // 🔐 tighten in production
 });
 
-// Explicit AI routes
-app.post('/api/ai/text', (req, res) => {
-  const { text, language } = req.body;
-  console.log('Text request:', { text, language });
-  res.json({ reply: `Echo: ${text}`, language });
+// Auth gate for every socket connection
+io.use(async (socket, next) => {
+  try {
+    // Client should send { auth: { token: IdToken } }
+    const token = socket.handshake.auth?.token;
+    if (!token) return next(new Error("No token"));
+
+    socket.user = await verifyJwtSocket(token); // attach user info
+    next();
+  } catch (err) {
+    next(new Error("Unauthorized"));
+  }
 });
 
-app.post('/api/ai/voice', (req, res) => {
-  const { language } = req.body;
-  console.log('Voice request:', { language });
-  res.json({ reply: 'Voice response', language, transcript: 'Sample transcript' });
+// Main socket handler
+io.on("connection", (socket) => {
+  console.log("🟢 Socket connected:", socket.user.email);
+  handleSocket(io, socket);
 });
 
-// Fallback for undefined routes
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
-
+// ── Start server ────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
